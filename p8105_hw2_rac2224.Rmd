@@ -9,7 +9,7 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Problem 1
+##Problem 1
 
 Reading and cleaning the Mr. Trash Wheel dataset
 
@@ -49,7 +49,7 @@ precip_data = transform(precip_data, month = month.name)
 *The number of observations in the dataset precip_data is `r nrow(precip_data)`. The number of observations in the dataset trash_data is `r nrow(trash_data)`.Within the dataset precip_data, key variables include `r ls(precip_data)`.. Within the dataset trash_data, key variables include `r ls(trash_data)`.The total precipitation in 2018 is `r sum(prec2018_data$total)`.
 The median number of sports balls in a dumpster in 2017 is `r  median(subset(trash_data, year==2017)$sports_balls)`. 
 
-Problem 2
+##Problem 2
 
 Cleaning data in FiveThirtyEight
 
@@ -102,7 +102,6 @@ merged_data =
   left_join(polsnp_data, unemployment_data)
 ```
 
-## explain briefly what each dataset contained, and describe the resulting dataset (e.g. give the dimension, range of years, and names of key variables)
 
 *The polsmonth dataset has the following range of years: a minimum year of `r min(pull(polsmonth_data, year))` and a maximum year of `r max(pull(polsmonth_data, year))`. The dimensions of the polsmonth dataset are `r dim(polsmonth_data)`. In terms of key variables, within the dataset polsmonth the following key variables were present: `r ls(polsmonth_data)`. 
 
@@ -114,7 +113,7 @@ The following key variables were present within the unemployment dataset: `r ls(
 *The resulting dataset, merged_data, has the following range of years: a minimum year of `r min(pull(merged_data, year))` to a maximum year of `r max(pull(merged_data,year))`. The dimensions of the resulting dataset, merged_data, are `r dim(merged_data)`. The following key variables were present within the resulting dataset, merged_data: `r ls(merged_data)`.
 
 
-Problem 3
+##Problem 3
 
 Cleaning Popular Baby Names dataset
 
@@ -139,7 +138,7 @@ olivia_data =
   olivia_data, 
   names_from = "year_of_birth", 
   values_from = "rank")
-kable(olivia_data[1:4, ], caption = "Rank in popularity of name Olivia over time.")
+kable(olivia_data[1:4, ], format = "pandoc", caption = "Rank in popularity of name Olivia over time")
 ```
 
 Table for most popular name among male children over time
@@ -153,8 +152,16 @@ male_data =
 male_data, 
   names_from = "year_of_birth", 
   values_from = "childs_first_name")
-kable(male_data[1:4, ], caption = "Most popular name among male children over time.")
+kable(male_data[1:4,], format = "pandoc", caption = "Most popular name among male children over time")
 ```
 
+Scatter plot for male, white non-hispanic children born in 2016 
+
+```{r}
+whitemale_data= babynames_data[which(babynames_data$gender=='MALE' & babynames_data$year_of_birth=="2016" & babynames_data$ethnicity=="WHITE NON HISP"), 1:6]
+whitemale_plot = ggplot(whitemale_data, aes(x = rank, y = count)) +
+  geom_point()
+print(whitemale_plot)
+ggsave("whitemale_plot.png")
 
 ```
