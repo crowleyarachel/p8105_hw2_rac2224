@@ -49,3 +49,15 @@ The number of observations in the dataset precip_data is `r nrow(precip_data)`. 
 Within the dataset precip_data, key variables include month, total, and year. Within the dataset trash_data, key variables include dumpster, month, year, date, weight_tons, volume_cube_yards, plastic_bottles, polystyrene, cigarette_butts, glass_bottles, grocery_bags, chip_bags, sports_balls, and homes_powered.
 The total precipitation in 2018 is `r sum(prec2018_data$total)`.
 The median number of sports balls in a dumpster in 2017 is `r  median(subset(trash_data, year==2017)$sports_balls)`. 
+
+Problem 2
+
+Cleaning data in FiveThirtyEight
+
+
+```{r}
+polsmonth_data=read_csv(file = "./data/pols-month.csv", col_types=NULL)
+polsmonth_data = janitor::clean_names(polsmonth_data)
+polsmonth_data = separate(polsmonth_data, mon, into=c("year", "month","day"))
+polsmonth_data = transform(polsmonth_data, month = month.name[1:822])
+```
