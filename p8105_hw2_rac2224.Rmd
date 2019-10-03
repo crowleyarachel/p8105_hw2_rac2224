@@ -81,15 +81,15 @@ snp_data = head(arrange(snp_data, year, month), 787)
 Cleaning unemployment dataset
 
 ```{r}
-library(tidyr)
 unemployment_data=read_csv(file = "./data/unemployment.csv")
 unemployment_data = janitor::clean_names(unemployment_data)
 unemployment_data = 
     pivot_longer(
     unemployment_data,
-    Jan:Dec,
+    jan:dec,
     names_to = "month",
     values_to = "unemployment")
+unemployment_data = transform(unemployment_data, month = month.name)
 ```
 
 
