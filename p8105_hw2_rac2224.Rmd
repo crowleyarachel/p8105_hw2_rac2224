@@ -102,5 +102,18 @@ merged_data =
   left_join(polsnp_data, unemployment_data)
 ```
 
+## explain briefly what each dataset contained, and describe the resulting dataset (e.g. give the dimension, range of years, and names of key variables)
 
+Problem 3
+
+Cleaning Popular Baby Names dataset
+
+```{r}
+babynames_data=read_csv(file = "./data/Popular_Baby_Names.csv")
+babynames_data = janitor::clean_names(babynames_data)
+babynames_data = babynames_data %>% distinct()
+babynames_data$ethnicity <- gsub("BLACK NON HISPANIC", "BLACK NON HISP", babynames_data$ethnicity)
+babynames_data$ethnicity <- gsub("WHITE NON HISPANIC", "WHITE NON HISP", babynames_data$ethnicity)
+babynames_data$ethnicity <- gsub("ASIAN AND PACIFIC ISLANDER", "ASIAN AND PACI", babynames_data$ethnicity)
+babynames_data= mutate(babynames_data, childs_first_name = str_to_title(childs_first_name))
 ```
