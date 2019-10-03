@@ -9,4 +9,15 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Problem 1
+
+Reading and cleaning the dataset 
+
+```{r}
+library(tidyverse)
+library(readxl)
+trash_data = read_excel("./data/Trashwheel.xlsx", sheet = 1, range = "A2:N408", col_types = NULL)
+trash_data = janitor::clean_names(trash_data)
+```
+
 
