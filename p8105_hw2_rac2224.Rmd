@@ -54,15 +54,22 @@ Problem 2
 
 Cleaning data in FiveThirtyEight
 
-
 ```{r}
-polsmonth_data=read_csv(file = "./data/pols-month.csv", col_types=NULL)
+polsmonth_data=read_csv(file = "./data/pols-month.csv")
 polsmonth_data = janitor::clean_names(polsmonth_data)
 polsmonth_data = separate(polsmonth_data, 
                           mon, into=c("year", "month","day"))
-polsmonth_data = 
-  mutate(polsmonth_data, month=month.name[as.integer(month)]) 
-polsmonth_data = 
-  mutate(polsmonth_data, president = prez_gop + prez_dem) %>%
-  select( -prez_gop, -prez_dem, -day)          
+polsmonth_data = mutate(polsmonth_data, month=month.name[as.integer(month)]) 
+polsmonth_data = mutate(polsmonth_data, president = prez_gop + prez_dem) %>%
+  select( -prez_gop, -prez_dem, -day)    
+
+snp_data=read_csv(file = "./data/snp.csv")
+snp_data = janitor::clean_names(snp_data)
+snp_data = separate(snp_data, 
+                          date, into=c("month", "day","year"))
+snp_data = mutate(snp_data, month=month.name[as.integer(month)]) %>%
+  select(-day) 
+snp_data = select(snp_data, year, month, everything())
+snp_data = head(arrange(snp_data, year, month), 787)
+
 ```
