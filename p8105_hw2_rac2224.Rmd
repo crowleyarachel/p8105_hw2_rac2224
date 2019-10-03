@@ -44,3 +44,8 @@ precip_data =
   full_join(prec2017_data, prec2018_data)
 precip_data = transform(precip_data, month = month.name)
 ```
+
+The number of observations in the dataset precip_data is `r nrow(precip_data)`. The number of observations in the dataset trash_data is `r nrow(trash_data)`.
+Within the dataset precip_data, key variables include month, total, and year. Within the dataset trash_data, key variables include dumpster, month, year, date, weight_tons, volume_cube_yards, plastic_bottles, polystyrene, cigarette_butts, glass_bottles, grocery_bags, chip_bags, sports_balls, and homes_powered.
+The total precipitation in 2018 is `r sum(prec2018_data$total)`.
+The median number of sports balls in a dumpster in 2017 is `r  median(subset(trash_data, year==2017)$sports_balls)`. 
