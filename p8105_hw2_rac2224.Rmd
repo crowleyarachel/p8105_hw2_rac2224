@@ -36,3 +36,11 @@ prec2017_data = read_excel("./data/Trashwheel.xlsx", sheet = 6, range =         
   prec2017_data = mutate(prec2017_data,
                          year = "2017")
 ```
+
+Combining precipitation datasets and converting month to character variable
+
+```{r}
+precip_data = 
+  full_join(prec2017_data, prec2018_data)
+precip_data = transform(precip_data, month = month.name)
+```
